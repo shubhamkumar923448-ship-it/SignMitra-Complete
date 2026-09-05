@@ -3125,7 +3125,7 @@
                 if (!app.state.aiSocket) {
                     utils.showToast("Establishing Neural Link with Python AI...", "info");
 
-                    app.state.aiSocket = io('http://127.0.0.1:5000');
+                    app.state.aiSocket = io('https://signmitra-complete-production.up.railway.app');
 
                     app.state.aiSocket.on('connect', () => {
                         console.log("🟢 Connected to Python AI Engine");
