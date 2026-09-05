@@ -1,10 +1,9 @@
 FROM python:3.11-slim
 
-# Install system dependencies required for OpenCV (libGL, libglib) and general build tools
+# Install system dependencies required for OpenCV and MediaPipe (using correct modern package names)
 RUN apt-get update && apt-get install -y \
-    libgl1-mesa-glx \
+    libgl1 \
     libglib2.0-0 \
-    build-existing \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -16,5 +15,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the python code
 COPY . .
 
-# Expose port and run uvicorn
+# Run uvicorn
 CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}"]
