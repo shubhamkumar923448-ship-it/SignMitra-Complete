@@ -1600,7 +1600,7 @@
                         if (isSetupMode) {
                             // 🔴 SETUP API CALL
                             try {
-                                const res = await fetch('http://localhost:1307/api/auth/set-pattern', {
+                                const res = await fetch('https://signmitra-backend.onrender.com/api/auth/set-pattern', {
                                     method: 'POST',
                                     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${app.state.token}` },
                                     body: JSON.stringify({ patternCode })
@@ -1617,7 +1617,7 @@
                             //  LOGIN API CALL
                             try {
                                 utils.showToast("Authenticating Pattern...", "info");
-                                const res = await fetch('http://localhost:1307/api/auth/pattern-login', {
+                                const res = await fetch('https://signmitra-backend.onrender.com/api/auth/pattern-login', {
                                     method: 'POST',
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify({ patternCode })
@@ -1752,7 +1752,7 @@
                 utils.showToast("Uploading new avatar...", "info");
 
                 try {
-                    const res = await fetch('http://localhost:1307/api/users/profile-pic', {
+                    const res = await fetch('https://signmitra-backend.onrender.com/api/users/profile-pic', {
                         method: 'POST',
                         headers: { 'Authorization': `Bearer ${app.state.token}` },
                         body: formData
@@ -1781,7 +1781,7 @@
                 }
 
                 try {
-                    const res = await fetch('http://localhost:1307/api/users/update-password', {
+                    const res = await fetch('https://signmitra-backend.onrender.com/api/users/update-password', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -1847,7 +1847,7 @@
                         formData.append('grade', grade);
                         formData.append('videoFile', fileInput.files[0]); // Ye 'videoFile' multer catch karega backend me
 
-                        const dbRes = await fetch('http://localhost:1307/api/lectures/upload', {
+                        const dbRes = await fetch('https://signmitra-backend.onrender.com/api/lectures/upload', {
                             method: 'POST',
                             headers: {
                                 'Authorization': `Bearer ${app.state.token}`
@@ -1914,7 +1914,7 @@
                 try {
                     utils.showToast("Authenticating securely via Backend...", "info");
 
-                    let res = await fetch('http://localhost:1307/api/auth/login', {
+                    let res = await fetch('https://signmitra-backend.onrender.com/api/auth/login', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ username, password: pass })
@@ -1988,7 +1988,7 @@
                     utils.showToast("Generating secure room link...", "info");
 
                     // Backend API (Port 1307)
-                    const res = await fetch('http://localhost:1307/api/classes', {
+                    const res = await fetch('https://signmitra-backend.onrender.com/api/classes', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -2041,7 +2041,7 @@
                     utils.showToast("Verifying session code...", "info");
 
                     // 🔴 FIX: full backend URL use karo, relative path nahi
-                    const res = await fetch(`http://localhost:1307/api/classes/${code}`);
+                    const res = await fetch(`https://signmitra-backend.onrender.com/api/classes/${code}`);
                     const data = await res.json();
 
                     if (!res.ok) {
@@ -2073,7 +2073,7 @@
 
                 try {
                     // 1. Backend se saari videos fetch karo
-                    const res = await fetch('http://localhost:1307/api/lectures', {
+                    const res = await fetch('https://signmitra-backend.onrender.com/api/lectures', {
                         headers: { 'Authorization': `Bearer ${app.state.token}` }
                     });
 
@@ -2140,7 +2140,7 @@
                 gridEl.innerHTML = '<div class="col-span-full text-center py-10 text-gray-500"><i class="fa-solid fa-spinner fa-spin text-3xl mb-3"></i><br>Loading Archives...</div>';
 
                 try {
-                    const res = await fetch('http://localhost:1307/api/lectures', {
+                    const res = await fetch('https://signmitra-backend.onrender.com/api/lectures', {
                         headers: { 'Authorization': `Bearer ${app.state.token}` }
                     });
 
@@ -2352,7 +2352,7 @@
 
                 // Fetch Teachers
                 try {
-                    const res = await fetch('http://localhost:1307/api/auth/teachers', { headers: { 'Authorization': `Bearer ${app.state.token}` } });
+                    const res = await fetch('https://signmitra-backend.onrender.com/api/auth/teachers', { headers: { 'Authorization': `Bearer ${app.state.token}` } });
                     const teachers = await res.json();
                     selectEl.innerHTML = teachers.map(t => `<option value="${t._id}">${t.name}</option>`).join('');
                 } catch (err) {
@@ -2514,7 +2514,7 @@
                         formData.append('rawSigns', JSON.stringify(window.activeSignBuffer));
                     }
 
-                    const res = await fetch('http://localhost:1307/api/doubts/ask', {
+                    const res = await fetch('https://signmitra-backend.onrender.com/api/doubts/ask', {
                         method: 'POST',
                         headers: { 'Authorization': `Bearer ${app.state.token}` },
                         body: formData
@@ -2542,7 +2542,7 @@
                 container.innerHTML = '<div class="text-center text-gray-500 font-bold mt-10">Checking your inbox...</div>';
 
                 try {
-                    const res = await fetch('http://localhost:1307/api/doubts/my-doubts', {
+                    const res = await fetch('https://signmitra-backend.onrender.com/api/doubts/my-doubts', {
                         headers: { 'Authorization': `Bearer ${app.state.token}` }
                     });
                     const doubts = await res.json();
@@ -2673,7 +2673,7 @@
                 container.innerHTML = '<div class="text-center text-gray-500 font-bold mt-10">Fetching pending queries...</div>';
 
                 try {
-                    const res = await fetch('http://localhost:1307/api/doubts/teacher-inbox', {
+                    const res = await fetch('https://signmitra-backend.onrender.com/api/doubts/teacher-inbox', {
                         headers: { 'Authorization': `Bearer ${app.state.token}` }
                     });
                     const doubts = await res.json();
@@ -2853,7 +2853,7 @@
                         formData.append('mediaFile', audioBlobData, 'teacher_reply.webm');
                     }
 
-                    const res = await fetch(`http://localhost:1307/api/doubts/${doubtId}/answer`, {
+                    const res = await fetch(`https://signmitra-backend.onrender.com/api/doubts/${doubtId}/answer`, {
                         method: 'POST',
                         headers: { 'Authorization': `Bearer ${app.state.token}` },
                         body: formData
@@ -2882,7 +2882,7 @@
 
                 // 2. Database se fetch karo
                 try {
-                    const res = await fetch('http://localhost:1307/api/lectures/my', {
+                    const res = await fetch('https://signmitra-backend.onrender.com/api/lectures/my', {
                         headers: { 'Authorization': `Bearer ${app.state.token}` }
                     });
 
@@ -2918,7 +2918,7 @@
                 if (!confirm("Are you sure you want to delete this module permanently?")) return;
 
                 try {
-                    const res = await fetch(`http://localhost:1307/api/lectures/${id}`, {
+                    const res = await fetch(`https://signmitra-backend.onrender.com/api/lectures/${id}`, {
                         method: 'DELETE',
                         headers: { 'Authorization': `Bearer ${app.state.token}` }
                     });
@@ -3423,7 +3423,7 @@
                     app.state.socket.disconnect();
                 }
 
-                const backendSocketUrl = "http://localhost:1307"; // 
+                const backendSocketUrl = "https://signmitra-backend.onrender.com"; // 
                 app.state.socket = io(backendSocketUrl);
 
                 app.state.socket.on('connect', () => {
@@ -3710,7 +3710,7 @@
                 }
 
                 if (app.state.user && app.state.user.role === 'teacher' && app.state.roomId) {
-                    fetch(`http://localhost:1307/api/classes/${app.state.roomId}/end`, {
+                    fetch(`https://signmitra-backend.onrender.com/api/classes/${app.state.roomId}/end`, {
                         method: 'POST',
                         headers: { 'Authorization': `Bearer ${app.state.token}` }
                     }).catch(err => console.error("Error ending class in DB:", err));
