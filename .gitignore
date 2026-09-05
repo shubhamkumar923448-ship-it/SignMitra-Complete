@@ -1,0 +1,18 @@
+# Python Virtual Environments & Caches
+.venv/
+env/
+**/__pycache__/
+*.py[cod]
+
+# Node.js modules
+node_modules/
+npm-debug.log*
+
+# AI Models & Raw Training Data (Inside Python folder)
+Python/data/raw/
+Python/data/processed/
+
+# Environment Secrets
+.env
+.DS_Store
+Thumbs.db
