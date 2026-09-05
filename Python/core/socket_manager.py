@@ -5,6 +5,12 @@ import numpy as np
 import cv2
 import time 
 import json
+import google.generativeai as genai
+import os
+
+# Initialize the Generative AI model
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+model = genai.GenerativeModel("gemini-3.6-flash")
 
 from vision.landmarks import process_frame_with_mediapipe
 from vision.sequence_buffer import SignSequenceBuffer
