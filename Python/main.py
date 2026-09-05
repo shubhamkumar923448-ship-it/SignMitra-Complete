@@ -4,6 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import socketio
 import os
+os.environ['WEB_CONCURRENCY'] = '1'
+os.environ['MALLOC_ARENA_MAX'] = '2'
 
 # Import our custom Socket.IO server
 from core.socket_manager import sio
