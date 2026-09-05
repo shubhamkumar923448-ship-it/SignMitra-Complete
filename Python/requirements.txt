@@ -13,6 +13,6 @@ scikit-learn<1.8.0
 python-dotenv
 requests
 Pillow
-tensorflow-cpu==2.15.0
+tensorflow-cpu
 keras==2.15.0
 h5py
