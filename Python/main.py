@@ -41,7 +41,7 @@ async def get_audio(request: TTSRequest):
 
 
 # This is the most bulletproof way to handle FastAPI + SocketIO
-socket_app = socketio.ASGIApp(sio, other_asgi_app=app)
+app = socketio.ASGIApp(sio, other_asgi_app=fastapi_app)
 
 if __name__ == "__main__":
     print("🚀 Starting SignMitra Neural Engine...")
