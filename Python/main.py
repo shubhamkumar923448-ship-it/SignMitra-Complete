@@ -10,7 +10,6 @@ os.environ['MALLOC_ARENA_MAX'] = '2'
 # Import our custom Socket.IO server
 from core.socket_manager import sio
 # Import our custom modules
-from core.socket_manager import sio
 from speech.tts import generate_audio_base64
 
 # Create the FastAPI app
@@ -24,6 +23,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app = socketio.ASGIApp(sio, app)
 
 @app.get("/")
 async def root():
