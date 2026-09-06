@@ -23,11 +23,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app = socketio.ASGIApp(sio, app)
 
 @app.get("/")
 async def root():
     return {"status": "online", "message": "SignMitra Neural Engine is active."}
+
 
 class TTSRequest(BaseModel):
     text: str
