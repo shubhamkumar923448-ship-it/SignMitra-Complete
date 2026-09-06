@@ -20,7 +20,7 @@ app = FastAPI(title="SignMitra AI Microservices", version="1.0.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"], # Allows all origins for testing
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
