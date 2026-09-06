@@ -3126,9 +3126,11 @@
                     utils.showToast("Establishing Neural Link with Python AI...", "info");
 
                     app.state.aiSocket = io("https://signmitra-ai.onrender.com", {
-                        transports: ["websocket"],
+                        path: "/socket.io/",
+                        transports: ["websocket", "polling"],
                         secure: true,
-                        rejectUnauthorized: false
+                        reconnection: true,
+                        reconnectionAttempts: 5
                     });
                     app.state.aiSocket.on('connect', () => {
                         console.log("🟢 Connected to Python AI Engine");

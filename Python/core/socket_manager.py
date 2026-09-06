@@ -11,8 +11,12 @@ import os
 # Initialize the Generative AI model
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 model = genai.GenerativeModel("gemini-3.6-flash")
-sio = socketio.AsyncServer(async_mode='asgi', cors_allowed_origins='*')
-
+sio = socketio.AsyncServer(
+    async_mode='asgi',
+    cors_allowed_origins='*',
+    logger=True,
+    engineio_logger=True
+)
 
 from vision.landmarks import process_frame_with_mediapipe
 from vision.sequence_buffer import SignSequenceBuffer
