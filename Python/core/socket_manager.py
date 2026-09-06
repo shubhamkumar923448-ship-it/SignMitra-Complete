@@ -11,6 +11,8 @@ import os
 # Initialize the Generative AI model
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 model = genai.GenerativeModel("gemini-3.6-flash")
+sio = socketio.AsyncServer(async_mode='asgi', cors_allowed_origins='*')
+
 
 from vision.landmarks import process_frame_with_mediapipe
 from vision.sequence_buffer import SignSequenceBuffer
@@ -20,7 +22,6 @@ from nlp.context_engine import process_sign_sequence
 from nlp.context_engine import process_teacher_reply_multimodal
 from nlp.context_engine import process_smart_doubt_on_send
 
-sio = socketio.AsyncServer(async_mode='asgi', cors_allowed_origins='*')
 
 client_sentences = {}
 client_cooldown = {} 
