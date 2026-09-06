@@ -2191,7 +2191,7 @@
                 const videoEl = document.getElementById('player-video');
                 videoEl.pause();
                 videoEl.removeAttribute('src');
-                
+
                 // Main Lecture Video load karo
                 videoEl.src = lecture.videoUrl;
                 videoEl.load();
@@ -2203,30 +2203,30 @@
                     const recordedBox = document.querySelector('#student-player-section .bg-gradient-to-b');
                     if (recordedBox) {
                         window.recordedAvatar = new VideoAvatarEngine(recordedBox);
-                        
-                        
+
+
                         const fixedAvatarLink = lecture.avatarUrl || lecture.visualUrl || lecture.lecture_video || "https://ik.imagekit.io/SignMitraProject/tr:w-400,q-70/lecture.mp4";
-                        
+
                         // Engine ko bypass karke direct fixed video lagai
                         window.recordedAvatar.videoPlayer.src = fixedAvatarLink;
                         window.recordedAvatar.videoPlayer.loop = true; // Avatar continuous chalega
 
                         // 🟢 PERFECT SYNC LOGIC
                         videoEl.addEventListener('play', () => {
-                            if(window.recordedAvatar && window.recordedAvatar.videoPlayer) {
+                            if (window.recordedAvatar && window.recordedAvatar.videoPlayer) {
                                 window.recordedAvatar.videoPlayer.play().catch(e => console.log(e));
                             }
                         });
-                        
+
                         videoEl.addEventListener('pause', () => {
-                            if(window.recordedAvatar && window.recordedAvatar.videoPlayer) {
+                            if (window.recordedAvatar && window.recordedAvatar.videoPlayer) {
                                 window.recordedAvatar.videoPlayer.pause();
                             }
                         });
 
                         videoEl.addEventListener('seeked', () => {
-                            if(window.recordedAvatar && window.recordedAvatar.videoPlayer) {
-                                window.recordedAvatar.videoPlayer.currentTime = videoEl.currentTime; 
+                            if (window.recordedAvatar && window.recordedAvatar.videoPlayer) {
+                                window.recordedAvatar.videoPlayer.currentTime = videoEl.currentTime;
                             }
                         });
                     }
@@ -2234,37 +2234,37 @@
 
                 // 🟢 TRANSCRIPT UI (CRASH FIX & TIMING FIX)
                 const tContainer = document.getElementById('player-transcript-container');
-                
+
                 // Time gaps theek kiye hain (4.9, 8.9) taaki text miss na ho
                 const demoTranscript = [
-                    { 
-                        time_start: 0, time_end: 4.9, 
-                        text: "Name, Place, Animal, Thing. To hum sabhi ne khela hai bachpan mein.<br><span class='text-gray-500 text-xs mt-1 block'>नाम प्लेस एनिमल थिंग. तो हम सभी ने खेला है. बचपन में.</span>" 
+                    {
+                        time_start: 0, time_end: 4.9,
+                        text: "Name, Place, Animal, Thing. To hum sabhi ne khela hai bachpan mein.<br><span class='text-gray-500 text-xs mt-1 block'>नाम प्लेस एनिमल थिंग. तो हम सभी ने खेला है. बचपन में.</span>"
                     },
-                    { 
-                        time_start: 5, time_end: 8.9, 
-                        text: "Hai na? Lekin English mein ise bolte hain Noun.<br><span class='text-gray-500 text-xs mt-1 block'>है ना लेकिन इंग्लिश में इसे बोलते हैं नाउन.</span>" 
+                    {
+                        time_start: 5, time_end: 8.9,
+                        text: "Hai na? Lekin English mein ise bolte hain Noun.<br><span class='text-gray-500 text-xs mt-1 block'>है ना लेकिन इंग्लिश में इसे बोलते हैं नाउन.</span>"
                     },
-                    { 
-                        time_start: 9, time_end: 15.9, 
-                        text: "Aaj hai English grammar ke basics seekhne ka. Jaise ki episode one mein Riya ek noun hai.<br><span class='text-gray-500 text-xs mt-1 block'>आज है इंग्लिश ग्रामर के बेसिक सीखने का प्लेस एनिमल्ड नाउन जैसे की एपिसोड वैन में रिया एक नाउन है.</span>" 
+                    {
+                        time_start: 9, time_end: 15.9,
+                        text: "Aaj hai English grammar ke basics seekhne ka. Jaise ki episode one mein Riya ek noun hai.<br><span class='text-gray-500 text-xs mt-1 block'>आज है इंग्लिश ग्रामर के बेसिक सीखने का प्लेस एनिमल्ड नाउन जैसे की एपिसोड वैन में रिया एक नाउन है.</span>"
                     },
-                    { 
-                        time_start: 16, time_end: 20.9, 
-                        text: "Achha phir ye Pronoun kya hota hai? Pronoun Noun ko replace karne ke liye use hota hai.<br><span class='text-gray-500 text-xs mt-1 block'>अच्छा फिर ये प्रोनाउन क्या होता है? प्रोनाउन नाउन को रिप्लेस करने के लिए उसे होता है.</span>" 
+                    {
+                        time_start: 16, time_end: 20.9,
+                        text: "Achha phir ye Pronoun kya hota hai? Pronoun Noun ko replace karne ke liye use hota hai.<br><span class='text-gray-500 text-xs mt-1 block'>अच्छा फिर ये प्रोनाउन क्या होता है? प्रोनाउन नाउन को रिप्लेस करने के लिए उसे होता है.</span>"
                     },
-                    { 
-                        time_start: 21, time_end: 27.9, 
-                        text: "Jaise ki 'Riya likes to party', baar-bar naam lene ki jagah 'She' laga denge.<br><span class='text-gray-500 text-xs mt-1 block'>जैसे की रिया लाइक्स तू पार्टी, बार-बार नाम लेने की जगह 'सी' लगा देंगे.</span>" 
+                    {
+                        time_start: 21, time_end: 27.9,
+                        text: "Jaise ki 'Riya likes to party', baar-bar naam lene ki jagah 'She' laga denge.<br><span class='text-gray-500 text-xs mt-1 block'>जैसे की रिया लाइक्स तू पार्टी, बार-बार नाम लेने की जगह 'सी' लगा देंगे.</span>"
                     },
-                    { 
-                        time_start: 28, time_end: 36.9, 
-                        text: "To He, She, It, They, You... ye sab hote hain Pronouns jo ki Nouns ko replace karte hain.<br><span class='text-gray-500 text-xs mt-1 block'>तो ही, सी, आईटी, दे, यू. ये सब होते हैं प्रोनाउंस जो की नाउस को रिप्लेस करते हैं.</span>" 
+                    {
+                        time_start: 28, time_end: 36.9,
+                        text: "To He, She, It, They, You... ye sab hote hain Pronouns jo ki Nouns ko replace karte hain.<br><span class='text-gray-500 text-xs mt-1 block'>तो ही, सी, आईटी, दे, यू. ये सब होते हैं प्रोनाउंस जो की नाउस को रिप्लेस करते हैं.</span>"
                     }
                 ];
 
                 let lastActiveSegmentText = "";
-                
+
                 // Video ke time ke hisaab se transcript print hoga
                 videoEl.ontimeupdate = () => {
                     const currentTime = videoEl.currentTime;
@@ -2278,18 +2278,18 @@
                             if (tContainer.querySelector('.text-gray-400')) {
                                 tContainer.innerHTML = '';
                             }
-                            
+
                             const messageDiv = document.createElement('div');
                             messageDiv.className = 'bg-gray-50 border border-gray-100 p-3 rounded-2xl text-gray-800 font-medium text-sm slide-up flex items-start gap-3 mb-2';
-                            
+
                             // Time aur Text print karega
                             messageDiv.innerHTML = `
                                 <span class="text-[10px] bg-brand/10 text-brand px-2 py-0.5 rounded font-mono shrink-0 mt-0.5">${Math.floor(currentTime)}s</span>
                                 <p class="leading-relaxed">${activeSegment.text}</p>
                             `;
-                            
+
                             tContainer.appendChild(messageDiv);
-                            
+
                             // Auto-scroll to bottom
                             tContainer.scrollTop = tContainer.scrollHeight;
                         }
@@ -2639,13 +2639,13 @@
             },
 
             //
-           playInboxAvatar: (doubtId) => {
+            playInboxAvatar: (doubtId) => {
                 const boxId = `student-inbox-avatar-${doubtId}`;
                 const container = document.getElementById(boxId);
-                
+
                 if (container) {
                     const fixedDoubtLink = "https://ik.imagekit.io/SignMitraProject/tr:w-400,q-70/doubt.mp4";
-                    
+
                     // Box ki padding hata kar usme direct looping video fit kar di
                     container.style.padding = '0';
                     container.innerHTML = `
@@ -2654,9 +2654,9 @@
                                autoplay loop muted playsinline>
                         </video>
                     `;
-                    
+
                     utils.showToast("ISL Simulation Running!", "success");
-                    
+
                     // UI Polish: Button ko green karke 'Active' dikhao
                     const btn = container.nextElementSibling;
                     if (btn && btn.tagName === 'BUTTON') {
@@ -3125,7 +3125,10 @@
                 if (!app.state.aiSocket) {
                     utils.showToast("Establishing Neural Link with Python AI...", "info");
 
-                    app.state.aiSocket =io("[https://signmitra-complete-production.up.railway.app](https://signmitra-complete-production.up.railway.app)")
+                    app.state.aiSocket = io("https://signmitra-complete-production.up.railway.app", {
+                        transports: ["websocket", "polling"],
+                        secure: true
+                    });
                     app.state.aiSocket.on('connect', () => {
                         console.log("🟢 Connected to Python AI Engine");
                         utils.showToast("Neural AI Engine Connected!", "success");
