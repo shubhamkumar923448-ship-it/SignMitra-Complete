@@ -10,7 +10,7 @@ load_dotenv()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 if GEMINI_API_KEY:
     genai.configure(api_key=GEMINI_API_KEY)
-    # Flash model lightweight aur fast hai
+    # Flash model 
     model = genai.GenerativeModel('gemini-3.6-flash')
 else:
     model = None
@@ -32,7 +32,7 @@ async def process_sign_sequence(raw_words_list, mode="academic"):
         response = await model.generate_content_async(prompt)
         raw_output = response.text.strip()
         
-        #  Agar mode teacher_to_student hai, toh JSON parse karo
+        
         if mode in ["teacher_to_student", "smart_finder"]:
             try:
                 clean_json_str = raw_output.replace('```json', '').replace('```', '').strip()
@@ -62,7 +62,7 @@ async def process_sign_sequence(raw_words_list, mode="academic"):
             
     except Exception as e:
         print(f"❌ Gemini Error: {e}")
-        # Error aane par fallback: tuple me return karo teacher mode ke liye
+        
         if mode == "teacher_to_student":
              return {"text": raw_text, "keywords": []}
         return raw_text
@@ -77,7 +77,7 @@ async def process_smart_doubt_on_send(raw_signs_list, typed_text=""):
     if not signs_string and not typed_text:
         return "No input provided."
 
-    # Check karo ki input me kya-kya available hai
+    
     if signs_string and typed_text:
         combined_input = f"Sign Language Gestures: '{signs_string}'\nTyped Text: '{typed_text}'"
         instruction = "Combine both inputs intelligently. The sign language shows the core concept and typed text gives specifics. Formulate ONE clear, polite, and professional question directed at the teacher."
@@ -116,7 +116,7 @@ async def process_teacher_reply_multimodal(typed_text, audio_b64=None):
     """
     system_instruction = get_system_prompt("teacher_to_student")
     
-    # 🔴 AI ko kya bhejenge uski list banayenge
+    
     prompt_content = [system_instruction]
     
     if typed_text:
@@ -124,10 +124,10 @@ async def process_teacher_reply_multimodal(typed_text, audio_b64=None):
         
     if audio_b64:
         try:
-            # Base64 ko bytes me wapas convert karke Gemini ko denge
+            
             audio_bytes = base64.b64decode(audio_b64)
             prompt_content.append({
-                "mime_type": "audio/webm", # Frontend WebM bhejta hai
+                "mime_type": "audio/webm", 
                 "data": audio_bytes
             })
             prompt_content.append("Listen to the attached audio recording from the teacher. Combine its meaning with the typed text (if any) to create the final response.")
@@ -135,11 +135,11 @@ async def process_teacher_reply_multimodal(typed_text, audio_b64=None):
             print(f"❌ Audio Decode Error: {e}")
 
     try:
-        # Multimodal request Gemini ko bheji
+        
         response = await model.generate_content_async(prompt_content)
         raw_output = response.text.strip()
         
-        # Output ko JSON me todna
+       
         clean_json_str = raw_output.replace('```json', '').replace('```', '').strip()
         parsed_data = json.loads(clean_json_str)
         

@@ -23,5 +23,5 @@ def extract_keypoints(hand_result, face_result):
             elif handedness == 'Right':
                 rh = hand_array
 
-    # Total = 1560 values
+   
     return np.concatenate([face, lh, rh])

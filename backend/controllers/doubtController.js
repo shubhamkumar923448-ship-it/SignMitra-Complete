@@ -11,7 +11,7 @@ export const askDoubt = async (req, res) => {
         const { teacherId, typedText, rawSigns } = req.body;
         let questionVideoUrl = "";
 
-        // 🔴 SMART MERGE LOGIC: Signs aur Typed Text ko ek sath jodna
+        
         let signsList = rawSigns ? JSON.parse(rawSigns) : [];
         let signsString = signsList.join(" ");
         
@@ -24,7 +24,7 @@ export const askDoubt = async (req, res) => {
             finalQuestionText = "Video Doubt Attached";
         }
 
-        // Agar video file aayi hai toh ImageKit par bhej do
+    
         if (req.file) {
             console.log("📥 Receiving Doubt Video...");
             const fileBase64 = req.file.buffer.toString('base64');
@@ -42,7 +42,7 @@ export const askDoubt = async (req, res) => {
         const newDoubt = new Doubt({
             studentId: req.user.id,
             teacherId,
-            questionText: finalQuestionText, // Yahan ab smart combined text jayega
+            questionText: finalQuestionText, 
             questionVideoUrl
         });
 
@@ -54,7 +54,7 @@ export const askDoubt = async (req, res) => {
     }
 };
 
-// 2. Student Get Their Own Doubts (Inbox)
+
 export const getMyDoubts = async (req, res) => {
     try {
         const doubts = await Doubt.find({ studentId: req.user.id })
@@ -66,7 +66,7 @@ export const getMyDoubts = async (req, res) => {
     }
 };
 
-// 3. Teacher Get Pending Doubts
+
 export const getPendingDoubtsForTeacher = async (req, res) => {
     try {
         if (req.user.role !== 'teacher') return res.status(403).json({ error: 'Unauthorized.' });
@@ -80,16 +80,16 @@ export const getPendingDoubtsForTeacher = async (req, res) => {
     }
 };
 
-// 4. Teacher Replies (With Audio)
+
 export const answerDoubt = async (req, res) => {
     try {
         if (req.user.role !== 'teacher') return res.status(403).json({ error: 'Unauthorized.' });
         
         const { doubtId } = req.params;
         const { answerText } = req.body;
-        let answerVideoUrl = ""; // Hum isme Audio ka URL save karenge
+        let answerVideoUrl = ""; 
 
-        // Agar audio record hoke aayi hai
+        
         if (req.file) {
             console.log("🎙️ Receiving Teacher Audio Reply...");
             const fileBase64 = req.file.buffer.toString('base64');

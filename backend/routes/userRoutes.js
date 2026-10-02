@@ -4,7 +4,7 @@ import { verifyToken } from '../middleware/authMiddleware.js';
 import multer from 'multer';
 
 const router = express.Router();
-const upload = multer({ storage: multer.memoryStorage() }); // RAM me save karega ImageKit ke liye
+const upload = multer({ storage: multer.memoryStorage() }); 
 
 router.post('/profile-pic', verifyToken, upload.single('profileImage'), updateProfilePic);
 router.post('/update-password', verifyToken, updatePassword);

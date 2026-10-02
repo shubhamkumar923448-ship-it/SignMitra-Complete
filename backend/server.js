@@ -24,27 +24,23 @@ io.on('connection', (socket) => {
     console.log(`🟢 WebRTC/Socket Client Connected: ${socket.id}`);
 
     socket.on('join-room', (roomId, role, userName) => {
-        // Room join se PEHLE dekho kaun already andar hai
         const roomSet = io.sockets.adapter.rooms.get(roomId);
         const existingSocketIds = roomSet ? Array.from(roomSet) : [];
 
         socket.join(roomId);
 
-        // Apni info socket pe store karo taaki disconnect pe pata chale kis room mein tha
         socket.data.role = role;
         socket.data.userName = userName;
         socket.data.roomId = roomId;
 
         console.log(`👤 User [${userName}] (${role}) joined Room: ${roomId}`);
 
-        // Send existing users' info to the newly joined user
         const existingUsers = existingSocketIds.map(id => {
             const s = io.sockets.sockets.get(id);
             return { socketId: id, role: s?.data?.role, name: s?.data?.userName };
         });
         socket.emit('existing-users', existingUsers);
 
-        // Purana behavior: existing members ko naye joiner ke baare mein batao
         socket.to(roomId).emit('user-connected', socket.id, role, userName);
     });
     socket.on('offer', (offer, roomId) => {
@@ -58,9 +54,7 @@ io.on('connection', (socket) => {
     socket.on('ice-candidate', (candidate, roomId) => {
         socket.to(roomId).emit('ice-candidate', candidate);
     });
-    //  FORWARDING ISL TEXT & AUDIO FROM STUDENT TO TEACHER
     socket.on('send-caption', (text, roomId, audioData) => {
-        // Teacher ho ya Student, text aur audio dono safe tarike se forward honge
         socket.to(roomId).emit('receive-caption', text, audioData);
     });
     //  TEACHER VOICE/CAPTION → STUDENT

@@ -7,19 +7,19 @@ export const updateProfilePic = async (req, res) => {
     try {
         if (!req.file) return res.status(400).json({ error: 'No image provided.' });
 
-        // ImageKit par upload karein
+        
         const response = await imagekit.upload({
             file: req.file.buffer, // Coming from Multer
             fileName: `profile_${req.user.id}_${Date.now()}.jpg`,
             folder: '/signmitra_profiles'
         });
 
-        // DB me URL update karein
+       
         const updatedUser = await User.findByIdAndUpdate(
             req.user.id, 
             { profilePicUrl: response.url }, 
             { new: true }
-        ).select('-passwordHash'); // Password hash ko response me na bhejein
+        ).select('-passwordHash'); 
 
         res.json({ success: true, user: updatedUser });
     } catch (err) {

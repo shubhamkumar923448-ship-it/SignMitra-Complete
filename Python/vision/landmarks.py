@@ -56,7 +56,7 @@ def get_hand_orientation(hand_marks, handedness):
     normal_vector = np.cross(vector1, vector2)
     z_direction = normal_vector[2]
     
-    # Mirror me hand labels swap hote hain, logic adjust kiya gaya hai
+    
     is_left_label = handedness[0].category_name == "Left"
     if is_left_label:
         return "BACK OF HAND" if z_direction < 0 else "PALM FRONT"
@@ -86,7 +86,7 @@ def draw_styled_landmarks(frame, hand_marks, handedness_info, w, h):
             
     padding = 20
     
-    # Kyunki video mirrored hai, MediaPipe left ko right samajhta hai. Humein UI pe correct dikhana hai.
+    
     category = handedness_info[0].category_name
     real_hand_type = "RIGHT" if category == "Left" else "LEFT"
     hud_text = f"{real_hand_type} HAND | {orientation}"
@@ -133,23 +133,19 @@ def process_frame_with_mediapipe(frame):
     # ✋ STRICT HAND-GATE LOGIC
     hands_visible = bool(hand_result.hand_landmarks)
     
-    # Agar haath nahi hain, toh keypoints ko None bhej do taaki AI predict na kare
     if hands_visible:
         keypoints = extract_keypoints(hand_result, face_result)
     else:
         keypoints = None 
 
-    # Dark overlay panel for text at the top
     cv2.rectangle(frame, (0, 0), (w, 50), (0, 0, 0), cv2.FILLED)
     
-    # Draw Hands & Update Status
     if hands_visible:
         for idx, hand_marks in enumerate(hand_result.hand_landmarks):
             handedness_info = hand_result.handedness[idx]
             draw_styled_landmarks(frame, hand_marks, handedness_info, w, h)
         cv2.putText(frame, "[ STATUS: EXTRACTING ISL VECTORS ]", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 255), 1, cv2.LINE_AA)
     else:
-        # Agar sirf face hai aur haath nahi (Emotion Mode Ready)
         if face_result.face_landmarks:
             cv2.putText(frame, "[ STATUS: FACE DETECTED (EMOTION ONLY) ]", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1, cv2.LINE_AA)
         else:

@@ -6,10 +6,10 @@ async def generate_audio_base64(text: str, voice: str = "en-IN-NeerjaNeural"):
         return None
         
     try:
-        # rate="+15%" lagaya hai taaki AI thoda jaldi bole, jisse response snappy lage
+       
         communicate = edge_tts.Communicate(text, voice, rate="+15%")
         
-        # 🟢 Seedha RAM (Memory) me audio collect karenge, Hard Disk ka use 0%
+       
         audio_data = bytearray()
         
         async for chunk in communicate.stream():

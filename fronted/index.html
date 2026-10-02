@@ -538,9 +538,9 @@
                 </button>
             </div>
 
-            <!-- IS GRID ME JS DATA BHAREGA -->
+            <!-- Student Archives Grid -->
             <div id="student-archives-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Data will be injected here -->
+               
             </div>
         </section>
 
@@ -1171,28 +1171,27 @@
         // class AvatarEngine {
         //     constructor(containerId) {
         //         this.container = document.getElementById(containerId);
-        //         if (!this.container) return; // Agar box nahi mila toh ruk jao
+        //         if (!this.container) return; 
 
         //         // 1. Scene aur Camera Setup
         //         this.scene = new THREE.Scene();
         //         // Camera ko container ke size ke hisaab se set kiya
         //         this.camera = new THREE.PerspectiveCamera(45, this.container.clientWidth / this.container.clientHeight, 0.1, 100);
 
-        //         // Agar box ki width 400px se kam hai (Live Class / Doubt Box)
+        //         
         //         if (this.container.clientWidth < 400) {
-        //             this.camera.position.set(0, 1.4, 4.5); // Camera thoda upar aur paas
-        //         }
-        //         // Agar box bada hai (Recorded Lectures)
+        //             this.camera.position.set(0, 1.4, 4.5); 
+        //        
         //         else {
-        //             this.camera.position.set(0, 1.0, 5.5); // Camera center mein aur thoda door
+        //             this.camera.position.set(0, 1.0, 5.5); 
         //         }
         //         // 2. Renderer (Graphic Engine)
-        //         // alpha: true se background transparent rahega (tera UI gradient piche dikhega)
+        //         
         //         this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         //         this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
         //         this.container.appendChild(this.renderer.domElement);
 
-        //         // 3. Cinematic Lights (Model accha dikhe)
+        //         
         //         const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
         //         this.scene.add(ambientLight);
         //         const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
@@ -1223,22 +1222,20 @@
         //         });
         //     }
 
-        //     // 4. .glb File Load Karna
+        //     
         //     loadModel(modelUrl) {
         //         const loader = new THREE.GLTFLoader();
         //         loader.load(modelUrl, (gltf) => {
         //             const model = gltf.scene;
-        //             model.position.set(0, -1, 0); // Model ko thoda neeche kiya taaki frame me aaye
+        //             model.position.set(0, -1, 0); 
         //             this.scene.add(model);
 
-        //             // Model ke andar jitni animations hain unko save karna
+        //             
         //             this.mixer = new THREE.AnimationMixer(model);
         //             gltf.animations.forEach((clip) => {
-        //                 // Animation ka naam lowercase karke dictionary me save kiya
         //                 this.animations[clip.name.toLowerCase()] = this.mixer.clipAction(clip);
         //             });
 
-        //             // Default 'idle' (saans lena) animation chalao
         //             this.playAnimation('idle');
         //             this.animate();
         //         });
@@ -1247,10 +1244,8 @@
         //     // 5. Smooth Animation Switcher
         //     playAnimation(animName) {
         //         const action = this.animations[animName.toLowerCase()];
-        //         // Agar animation nahi mili ya already wahi chal rahi hai, toh kuch mat karo
         //         if (!action || action === this.currentAction) return;
 
-        //         // Purani animation ko fade out aur nayi ko fade in karo (Smooth mix)
         //         if (this.currentAction) {
         //             this.currentAction.fadeOut(0.3);
         //         }
@@ -1258,7 +1253,6 @@
         //         this.currentAction = action;
         //     }
 
-        //     // Har frame ko render karne ka loop
         //     animate() {
         //         requestAnimationFrame(() => this.animate());
         //         const delta = this.clock.getDelta();
@@ -1279,7 +1273,6 @@
             "idle": "https://ik.imagekit.io/SignMitraProject/tr:w-400,q-70/idle.mp4",
             "default": "https://ik.imagekit.io/SignMitraProject/tr:w-400,q-70/idle.mp4",
 
-            // PANI / WATER WALE WORDS 
             "water": WATER_VIDEO_URL,
             "pani": WATER_VIDEO_URL,
             "pyas": WATER_VIDEO_URL,
@@ -1295,12 +1288,10 @@
         };
         class VideoAvatarEngine {
             constructor(containerElement) {
-                // ID string hai ya HTML element, dono ko handle karega
                 this.container = typeof containerElement === 'string' ? document.getElementById(containerElement) : containerElement;
 
                 if (!this.container) return;
 
-                // Box ko saaf karke pure black background dega
                 this.container.innerHTML = '';
 
                 this.container.style.setProperty('background', '#000000', 'important');
@@ -1333,7 +1324,7 @@
                 this.isPlayingGesture = false;
                 this.currentAnim = 'idle';
                 this.videoPlayer.src = videoDictionary['idle'];
-                this.videoPlayer.loop = true; // Sirf idle loop hogi
+                this.videoPlayer.loop = true; 
                 this.videoPlayer.play().catch(e => console.log("Video Play Error:", e));
             }
 
@@ -1363,14 +1354,13 @@
                 const nextAnim = this.animationQueue.shift();
                 const videoUrl = videoDictionary[nextAnim] || videoDictionary['idle'];
 
-                this.isPlayingGesture = true; // Avatar ab busy hai
+                this.isPlayingGesture = true; 
                 this.currentAnim = nextAnim;
                 this.videoPlayer.src = videoUrl;
-                this.videoPlayer.loop = false; // Gestures loop nahi honge, sirf ek baar chalenge
+                this.videoPlayer.loop = false; 
 
                 this.videoPlayer.play().catch(e => {
                     console.log("Video Play Error:", e);
-                    // Agar URL me error aaye, toh atakna nahi, sidha agla word chala do
                     this.processQueue();
                 });
             }
@@ -1421,7 +1411,6 @@
             "yes": "yes", "correct": "yes",
             "no": "no", "wrong": "no",
             "good": "thumbsup", "great": "thumbsup", "excellent": "thumbsup",
-            // Random lambe sentences ke liye fallback animations (taaki robot freeze na lage)
             "science": "walkjump", "computer": "dance", "math": "punch",
             "default": "idle"
         };
@@ -1508,7 +1497,7 @@
                     const utterance = new SpeechSynthesisUtterance(text);
 
                     utterance.lang = 'hi-IN';
-                    utterance.rate = 0.9;  // Thodi aaram se aur clear padhne ke liye
+                    utterance.rate = 0.9;  
                     utterance.pitch = 1.0;
 
                     const voices = window.speechSynthesis.getVoices();
@@ -1664,8 +1653,7 @@
                 title.textContent = "Perform your Sign";
                 title.classList.replace('text-green-500', 'text-gray-900');
                 desc.textContent = "AI is watching your gestures... (Auto-searching in 5s)";
-                searchInput.value = ""; // Clear old search
-
+                searchInput.value = ""; 
 
                 window.activeSignBuffer = [];
 
@@ -1674,13 +1662,12 @@
                     app.state.searchStream = stream;
                     video.srcObject = stream;
 
-                    // AI Pipeline shuru karo
+                    
                     app.connectAIEngine();
                     app.startAIProcessing('search-camera-feed');
 
                     setTimeout(() => {
-                        app.stopAIProcessing(); // Camera capture band
-
+                        app.stopAIProcessing(); 
                         const capturedSigns = window.activeSignBuffer || [];
 
                         if (capturedSigns.length === 0) {
@@ -1699,24 +1686,24 @@
 
                             setTimeout(() => {
                                 app.closeVisualSearch();
-                                searchInput.value = data.query; // Auto-type in search bar
+                                searchInput.value = data.query; 
                                 utils.showToast(`Loading ${data.subject} modules...`, "success");
 
                                 // Highlight effect
                                 searchInput.parentElement.classList.add('ring-4', 'ring-brand/40');
                                 setTimeout(() => searchInput.parentElement.classList.remove('ring-4', 'ring-brand/40'), 1000);
 
-                                // Asli folder (Category) load karna start karega
+                                
                                 setTimeout(() => {
                                     app.openSubject(data.subject, data.query);
                                 }, 800);
                             }, 1800);
                         });
 
-                        // Captured signs Python ko bhejo
+                        
                         app.state.aiSocket.emit('request_smart_search', { rawSigns: capturedSigns });
 
-                    }, 5000); // 5 seconds recording timer
+                    }, 5000); 
 
                 } catch (err) {
                     app.closeVisualSearch();
@@ -1737,7 +1724,7 @@
             },
 
             openProfileModal: () => {
-                // Ensure correct image is shown in modal
+                
                 document.getElementById('modal-profile-pic').src = app.state.user.profilePicUrl || 'https://placehold.co/150x150/7c3aed/ffffff?text=U';
                 app.openModal('profile-modal');
             },
@@ -1845,13 +1832,13 @@
                         formData.append('title', title);
                         formData.append('subject', subject);
                         formData.append('grade', grade);
-                        formData.append('videoFile', fileInput.files[0]); // Ye 'videoFile' multer catch karega backend me
+                        formData.append('videoFile', fileInput.files[0]); 
 
                         const dbRes = await fetch('https://signmitra-backend.onrender.com/api/lectures/upload', {
                             method: 'POST',
                             headers: {
                                 'Authorization': `Bearer ${app.state.token}`
-                                // DHYAN DEIN: FormData bhejte waqt 'Content-Type' manually set NAHI karte
+                               
                             },
                             body: formData
                         });
@@ -1971,10 +1958,10 @@
 
                 document.getElementById('login-form').reset();
 
-                // Wapas Auth Section (Login Screen) dikhayein
+                
                 app.showSection('auth-section');
 
-                // Text Tab ko default open rakhein
+                
                 app.switchAuthTab('text');
 
                 utils.showToast("Neural connection safely terminated.", "info");
@@ -1987,14 +1974,13 @@
                 try {
                     utils.showToast("Generating secure room link...", "info");
 
-                    // Backend API (Port 1307)
+                    
                     const res = await fetch('https://signmitra-backend.onrender.com/api/classes', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': `Bearer ${app.state.token}` // Token bhej rahe hain security ke liye
                         },
-                        // Backend schema match karne ke liye data bhej rahe hain
                         body: JSON.stringify({
                             name: "Live Class",
                             grade: 5,
@@ -2006,7 +1992,7 @@
                     const data = await res.json();
                     if (!res.ok) throw new Error(data.error || "Failed to create class");
 
-                    // Real Database
+                    
                     app.state.roomId = data.joinCode;
                     document.getElementById('generated-room-code').textContent = app.state.roomId;
                     document.getElementById('generated-link-box').classList.remove('hidden');
@@ -2040,7 +2026,6 @@
                 try {
                     utils.showToast("Verifying session code...", "info");
 
-                    // 🔴 FIX: full backend URL use karo, relative path nahi
                     const res = await fetch(`https://signmitra-backend.onrender.com/api/classes/${code}`);
                     const data = await res.json();
 
@@ -2072,7 +2057,6 @@
                 gridEl.innerHTML = '<div class="col-span-full text-center py-10 text-brand"><i class="fa-solid fa-spinner fa-spin text-4xl mb-3"></i><br><span class="font-bold uppercase tracking-widest text-sm">Searching Database...</span></div>';
 
                 try {
-                    // 1. Backend se saari videos fetch karo
                     const res = await fetch('https://signmitra-backend.onrender.com/api/lectures', {
                         headers: { 'Authorization': `Bearer ${app.state.token}` }
                     });
@@ -2081,7 +2065,6 @@
                     const data = await res.json();
                     app.state.currentLectures = data;
 
-                    // 2. 🔴 FRONTEND FILTERING MAGIC (Kyunki backend pe filter route nahi hai)
                     let filteredData = data;
 
                     if (subjectName && subjectName !== "General") {
@@ -2094,7 +2077,6 @@
                         );
                     }
 
-                    // 3. Agar koi video nahi mili
                     if (filteredData.length === 0) {
                         gridEl.innerHTML = `
                             <div class="col-span-full text-center py-10 text-gray-500">
@@ -2105,7 +2087,6 @@
                         return;
                     }
 
-                    // 4. Sirf Filtered Videos ko screen par render karo
                     gridEl.innerHTML = filteredData.map(lec => `
                         <div onclick="app.playLecture('${lec._id}')" class="bg-white rounded-3xl p-4 shadow-sm border border-gray-100 hover:shadow-xl hover:border-brand/30 transition-all group flex flex-col cursor-pointer">
                             <div class="bg-gray-900 h-48 rounded-2xl mb-4 relative overflow-hidden flex items-center justify-center">
@@ -2131,7 +2112,6 @@
             },
 
 
-            // ================== STUDENT ARCHIVES & PLAYER LOGIC ==================
             openArchives: async () => {
                 app.showSection('student-archives-section');
                 utils.showToast("Loading modules from cloud...", "info");
@@ -2147,14 +2127,13 @@
                     if (!res.ok) throw new Error("Failed to fetch");
                     const data = await res.json();
 
-                    app.state.currentLectures = data; // Data save kar liya aage play karne ke liye
+                    app.state.currentLectures = data; 
 
                     if (data.length === 0) {
                         gridEl.innerHTML = '<div class="col-span-full text-center py-10 text-gray-500"><i class="fa-solid fa-box-open text-4xl mb-3 opacity-50"></i><br>No modules uploaded yet.</div>';
                         return;
                     }
 
-                    // Card design with ImageKit video background
                     gridEl.innerHTML = data.map(lec => `
                         <div onclick="app.playLecture('${lec._id}')" class="bg-white rounded-3xl p-4 shadow-sm border border-gray-100 hover:shadow-xl hover:border-brand/30 transition-all group flex flex-col cursor-pointer">
                             <div class="bg-gray-900 h-48 rounded-2xl mb-4 relative overflow-hidden flex items-center justify-center">
@@ -2192,7 +2171,6 @@
                 videoEl.pause();
                 videoEl.removeAttribute('src');
 
-                // Main Lecture Video load karo
                 videoEl.src = lecture.videoUrl;
                 videoEl.load();
 
@@ -2207,11 +2185,10 @@
 
                         const fixedAvatarLink = lecture.avatarUrl || lecture.visualUrl || lecture.lecture_video || "https://ik.imagekit.io/SignMitraProject/tr:w-400,q-70/lecture.mp4";
 
-                        // Engine ko bypass karke direct fixed video lagai
                         window.recordedAvatar.videoPlayer.src = fixedAvatarLink;
-                        window.recordedAvatar.videoPlayer.loop = true; // Avatar continuous chalega
+                        window.recordedAvatar.videoPlayer.loop = true; 
 
-                        // 🟢 PERFECT SYNC LOGIC
+                        //  PERFECT SYNC LOGIC
                         videoEl.addEventListener('play', () => {
                             if (window.recordedAvatar && window.recordedAvatar.videoPlayer) {
                                 window.recordedAvatar.videoPlayer.play().catch(e => console.log(e));
@@ -2235,7 +2212,7 @@
                 // 🟢 TRANSCRIPT UI (CRASH FIX & TIMING FIX)
                 const tContainer = document.getElementById('player-transcript-container');
 
-                // Time gaps theek kiye hain (4.9, 8.9) taaki text miss na ho
+                
                 const demoTranscript = [
                     {
                         time_start: 0, time_end: 4.9,
@@ -2265,7 +2242,7 @@
 
                 let lastActiveSegmentText = "";
 
-                // Video ke time ke hisaab se transcript print hoga
+                
                 videoEl.ontimeupdate = () => {
                     const currentTime = videoEl.currentTime;
                     const activeSegment = demoTranscript.find(seg => currentTime >= seg.time_start && currentTime <= seg.time_end);
@@ -2274,7 +2251,7 @@
                         lastActiveSegmentText = activeSegment.text;
 
                         if (tContainer) {
-                            // Agar initial "Waiting..." text hai toh hata do
+                           
                             if (tContainer.querySelector('.text-gray-400')) {
                                 tContainer.innerHTML = '';
                             }
@@ -2282,7 +2259,7 @@
                             const messageDiv = document.createElement('div');
                             messageDiv.className = 'bg-gray-50 border border-gray-100 p-3 rounded-2xl text-gray-800 font-medium text-sm slide-up flex items-start gap-3 mb-2';
 
-                            // Time aur Text print karega
+                            
                             messageDiv.innerHTML = `
                                 <span class="text-[10px] bg-brand/10 text-brand px-2 py-0.5 rounded font-mono shrink-0 mt-0.5">${Math.floor(currentTime)}s</span>
                                 <p class="leading-relaxed">${activeSegment.text}</p>
@@ -2342,7 +2319,7 @@
                     app.connectAIEngine();
                     app.stopAIProcessing();
 
-                    // Doubt camera par AI tracking chalu karo
+                    
                     app.startAIProcessing('student-doubt-camera');
                     app.retakeDoubtRecording();
 
@@ -2363,7 +2340,6 @@
             closeDoubtModal: () => {
                 app.closeModal('ask-doubt-modal');
 
-                // 🔴 FIX: Doubt modal band hote hi iska camera safely band kar do taaki background kharab na ho
                 if (app.doubtState.stream) {
                     app.doubtState.stream.getTracks().forEach(t => t.stop());
                     app.doubtState.stream = null;
@@ -2375,13 +2351,11 @@
 
                 app.stopAIProcessing();
 
-                // Agar student Live Class me hai, toh wapas secondary stream par AI chalu karo
                 if (app.state.inClass && app.state.user?.role === 'student' && app.state.localStream) {
                     const secVid = document.getElementById('secondary-video-stream');
                     if (secVid) secVid.srcObject = app.state.localStream;
                     app.startAIProcessing('secondary-video-stream');
                 } else if (!app.state.inClass && !document.getElementById('mitra-bridge-section').classList.contains('hidden')) {
-                    // Agar Mitra Bridge me hai, toh wapas bridge stream chalu karo
                     if (app.state.bridgeStream) {
                         const bridgeVid = document.getElementById('bridge-camera-feed');
                         if (bridgeVid) bridgeVid.srcObject = app.state.bridgeStream;
@@ -2440,7 +2414,6 @@
                 document.getElementById('student-doubt-playback').classList.add('hidden');
                 document.getElementById('student-doubt-playback').src = '';
 
-                //  Lines wapas dikhao aur processing shuru karo
                 const overlay = document.getElementById('doubt-ai-overlay');
                 if (overlay) overlay.classList.remove('hidden');
                 app.startAIProcessing('student-doubt-camera');
@@ -2455,7 +2428,6 @@
                 const teacherId = document.getElementById('doubt-teacher-select').value;
                 const text = document.getElementById('doubt-text').value.trim();
 
-                // Check karo ki ya toh video record ki hai, ya live signs buffer me hain, ya text likha hai
                 const hasSigns = app.doubtState.videoBlob || (window.activeSignBuffer && window.activeSignBuffer.length > 0);
 
                 if (!teacherId) {
@@ -2469,27 +2441,22 @@
 
                 utils.showToast("Neural Processing: AI is polishing your doubt...", "info");
 
-                // 🔴 NAYA FLOW: Pehle Python AI ko bhejenge
                 if (app.state.aiSocket && app.state.aiSocket.connected) {
                     const rawSigns = window.activeSignBuffer || [];
 
-                    // AI se result aane ka wait karenge (once listener use kar rahe hain taaki duplicate call na ho)
                     app.state.aiSocket.once('smart_doubt_result', async (data) => {
                         const finalPolishedDoubt = data.doubt_text;
                         console.log("🧠 AI Polished Doubt:", finalPolishedDoubt);
 
-                        // Ab AI ne polish kar diya, toh Node.js ko bhejenge save karne ke liye
                         await app._saveDoubtToDB(teacherId, finalPolishedDoubt);
                     });
 
-                    // Trigger Python AI Processing
                     app.state.aiSocket.emit('request_smart_doubt', {
                         rawSigns: rawSigns,
                         typedText: text
                     });
 
                 } else {
-                    // Failsafe: Agar Python AI down hai toh direct send kar do (System nahi tutna chahiye)
                     utils.showToast("AI disconnected. Sending raw doubt...", "warning");
                     await app._saveDoubtToDB(teacherId, text);
                 }
@@ -2501,15 +2468,12 @@
                     const formData = new FormData();
                     formData.append('teacherId', teacherId);
 
-                    // Yahan hum AI ka banaya hua clean text bhej rahe hain
                     formData.append('typedText', polishedText);
 
-                    // Agar student ne video record ki hai doubt ke liye
                     if (app.doubtState.videoBlob) {
                         formData.append('mediaFile', app.doubtState.videoBlob, 'student_doubt.webm');
                     }
 
-                    // Raw signs backup ke liye
                     if (window.activeSignBuffer && window.activeSignBuffer.length > 0) {
                         formData.append('rawSigns', JSON.stringify(window.activeSignBuffer));
                     }
@@ -2522,7 +2486,6 @@
 
                     if (!res.ok) throw new Error("Failed to send doubt to database.");
 
-                    // Send hone ke baad modal band karo aur saara data saaf kar do
                     app.closeDoubtModal();
                     document.getElementById('doubt-text').value = '';
                     app.doubtState.videoBlob = null;
@@ -2646,7 +2609,6 @@
                 if (container) {
                     const fixedDoubtLink = "https://ik.imagekit.io/SignMitraProject/tr:w-400,q-70/doubt.mp4";
 
-                    // Box ki padding hata kar usme direct looping video fit kar di
                     container.style.padding = '0';
                     container.innerHTML = `
                         <video src="${fixedDoubtLink}" 
@@ -2657,7 +2619,6 @@
 
                     utils.showToast("ISL Simulation Running!", "success");
 
-                    // UI Polish: Button ko green karke 'Active' dikhao
                     const btn = container.nextElementSibling;
                     if (btn && btn.tagName === 'BUTTON') {
                         btn.innerHTML = '<i class="fa-solid fa-check-circle"></i> Simulation Active';
@@ -2687,7 +2648,6 @@
                     container.innerHTML = unresolved.map(doubt => `
                         <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 flex flex-col md:flex-row gap-8 mb-4 hover:shadow-md transition-shadow">
                             
-                            <!-- 🔴 FIXED: Left: Asli Video Player (Seedha kiya gaya hai) -->
                             <div class="w-full md:w-1/3 bg-black rounded-2xl overflow-hidden relative h-64 border-2 border-gray-800 flex items-center justify-center">
                                 ${doubt.questionVideoUrl
                             ? `<video src="${doubt.questionVideoUrl}" controls class="w-full h-full object-contain" style="transform: scaleX(1) !important;"></video>`
@@ -2771,13 +2731,13 @@
                             btn.innerHTML = '<i class="fa-solid fa-rotate-right"></i> Re-Record Audio';
                             btn.classList.replace('bg-red-500', 'bg-green-500');
 
-                            // Mic ka access band karein
+                            // 
                             stream.getTracks().forEach(track => track.stop());
                         };
 
                         app.audioRecorder.start(); // Standard start
 
-                        preview.classList.add('hidden'); // Purana preview chupayein
+                        preview.classList.add('hidden'); 
                         btn.innerHTML = '<i class="fa-solid fa-stop"></i> Recording... (Click to Stop)';
                         btn.classList.replace('bg-brand', 'bg-red-500');
                         btn.classList.replace('bg-green-500', 'bg-red-500');
@@ -2788,7 +2748,7 @@
                         utils.showToast("Could not access Microphone. Check browser settings.", "error");
                     }
                 } else {
-                    // Stop recording safely
+                   
                     if (app.audioRecorder.state === 'recording') {
                         app.audioRecorder.stop();
                         btn.classList.remove('animate-pulse');
@@ -2806,7 +2766,6 @@
 
                 utils.showToast("Neural Processing: AI is listening to your audio and polishing...", "info");
 
-                // 🔴 NAYA HELPER: Blob ko Base64 me convert karne ke liye
                 const blobToBase64 = (blob) => {
                     return new Promise((resolve, reject) => {
                         const reader = new FileReader();
@@ -2818,7 +2777,6 @@
 
                 if (app.state.aiSocket && app.state.aiSocket.connected) {
 
-                    // Audio ko base64 me convert karenge agar teacher ne record ki hai
                     let audioB64 = null;
                     if (app.audioBlob) {
                         audioB64 = await blobToBase64(app.audioBlob);
@@ -2828,7 +2786,6 @@
                         console.log("🧠 AI Polished Multimodal Reply:", data);
                         const polishedText = data.text;
 
-                        // Ab DB me dono cheezein (Polished Text + Original Audio File) bhejenge
                         await app._saveTeacherReplyToDB(doubtId, polishedText, app.audioBlob);
                     });
 
@@ -2843,7 +2800,6 @@
                 }
             },
 
-            // 🔴 NAYA HELPER FUNCTION: Asali Node.js DB call ke liye
             _saveTeacherReplyToDB: async (doubtId, finalAnswerText, audioBlobData) => {
                 try {
                     const formData = new FormData();
@@ -2874,13 +2830,11 @@
 
             // ================== LECTURE (CONTENT) MANAGEMENT ==================
             openManageContent: async () => {
-                // 1. Pehle modal open karo
                 app.openModal('manage-content-modal');
                 utils.showToast("Fetching your content from Database...", "info");
 
                 const listEl = document.getElementById('teacher-lectures-list');
 
-                // 2. Database se fetch karo
                 try {
                     const res = await fetch('https://signmitra-backend.onrender.com/api/lectures/my', {
                         headers: { 'Authorization': `Bearer ${app.state.token}` }
@@ -2914,7 +2868,6 @@
             },
 
             deleteLecture: async (id) => {
-                // Confirm karne se pehle frontend pe block karenge
                 if (!confirm("Are you sure you want to delete this module permanently?")) return;
 
                 try {
@@ -2936,7 +2889,6 @@
                 utils.showToast("Initializing Daily Talk Camera...", "info");
 
                 try {
-                    // Bridge ke liye fresh stream lo taaki koi conflict na ho
                     const stream = await navigator.mediaDevices.getUserMedia({
                         video: { width: { ideal: 880 }, height: { ideal: 640 } },
                         audio: false
@@ -2968,7 +2920,6 @@
                     app.state.bridgeStream = null;
                     document.getElementById('bridge-camera-feed').srcObject = null;
 
-                    // 🔴 ADDED: Reset UI - Video wapas dikhao, AI image chupao
                     document.getElementById('bridge-camera-feed').classList.remove('hidden');
                     const aiImgEl = document.getElementById('bridge-ai-feed');
                     if (aiImgEl) {
@@ -2991,7 +2942,6 @@
                 if (app.state.aiSocket && app.state.aiSocket.connected) {
                     app.state.aiSocket.emit('clear_memory');
                 }
-                // 🔴 NAYA: AI ko frame bhejna band karein
                 app.stopAIProcessing();
 
                 app.showSection('student-section');
@@ -3025,7 +2975,7 @@
                 app.state.speechRecognition = new SpeechRecognition();
                 app.state.speechRecognition.continuous = true;
                 app.state.speechRecognition.interimResults = true;
-                app.state.speechRecognition.lang = 'en-IN'; // English/Hindi mixed support ke liye
+                app.state.speechRecognition.lang = 'en-IN'; 
 
                 app.state.speechRecognition.onstart = () => {
                     app.state.isListening = true;
@@ -3052,12 +3002,10 @@
 
                                 if (app.state.inClass && app.state.user?.role === 'teacher') {
 
-                                    // 1. Python AI ko bhejo (For NLP Polish)
                                     if (app.state.aiSocket && app.state.aiSocket.connected) {
                                         app.state.aiSocket.emit('process_teacher_text', { text: finalTranscript });
                                     }
 
-                                    // 2. 🔴 FIXED: Node.js ke through Student ko bhejo (Exact old event name)
                                     if (app.state.socket && app.state.socket.connected && app.state.roomId) {
                                         app.state.socket.emit(
                                             'send-teacher-caption',
@@ -3069,7 +3017,6 @@
                                 else if (!app.state.inClass && !document.getElementById('mitra-bridge-section').classList.contains('hidden')) {
                                     let words = finalTranscript.toLowerCase().split(/[ ,.?]+/);
                                     for (let w of words) {
-                                        // Agar word dictionary me hai, toh usko avatar ki line (queue) me laga do
                                         if (videoDictionary[w] && w !== 'idle' && w !== 'default') {
                                             console.log(`🤖 Triggering Mitra Avatar for word: ${w}`);
                                             if (window.mitraAvatar) window.mitraAvatar.playAnimation(w);
@@ -3082,7 +3029,6 @@
                         }
                     }
 
-                    // Teacher's Local UI Display (Intact)
                     const textDisplay = document.getElementById('bridge-speech-translation');
                     if (textDisplay && (finalTranscript.trim() !== "" || interimTranscript.trim() !== "")) {
                         let existingText = textDisplay.getAttribute('data-persisted') || "";
@@ -3105,11 +3051,10 @@
                             try {
                                 app.state.speechRecognition.start();
                             } catch (e) {
-                                // Ignore if already started
+                                console.error("Mic restart failed:", e);
                             }
-                        }, 400); // 0.4 second me wapas mic ON
+                        }, 400); 
                     } else {
-                        // Agar Teacher ne manually button dabakar band kiya hai, tab UI off karo
                         if (micBtn) {
                             micBtn.classList.remove('animate-pulse');
                             micBtn.style.background = '';
@@ -3125,10 +3070,7 @@
                 if (!app.state.aiSocket) {
                     utils.showToast("Establishing Neural Link with Python AI...", "info");
 
-                    app.state.aiSocket = io("https://signmitra-ai.onrender.com", {
-                        transports: ["websocket", "polling"],
-                        secure: true
-                    });
+                    app.state.aiSocket = io("http://127.0.0.1:5000");
                     app.state.aiSocket.on('connect', () => {
                         console.log("🟢 Connected to Python AI Engine");
                         utils.showToast("Neural AI Engine Connected!", "success");
@@ -3138,11 +3080,9 @@
                         console.error("🔴 AI Connection Error:", error);
                     });
                     app.state.aiSocket.on('audio_ready', (data) => {
-                        // Agar Live class hai, toh Teacher ko forward kar do
                         if (app.state.inClass && app.state.socket && app.state.user?.role === 'student') {
                             app.state.socket.emit('send-audio-only', app.state.roomId, data.audio);
                         }
-                        // Agar Mitra Bridge me hai, toh direct bacha do
                         else if (!app.state.inClass && !document.getElementById('mitra-bridge-section').classList.contains('hidden')) {
                             if (data.audio) {
                                 const sound = new Audio(data.audio);
@@ -3152,8 +3092,7 @@
                     });
                     app.state.aiSocket.on('teacher_text_polished', (data) => {
                         if (app.state.inClass && app.state.socket && app.state.user?.role === 'teacher') {
-                            // ...Toh use Node.js ke through Student ki screen par bhej do!
-                            // Flow: text, roomId, null (kyunki audio direct webrtc se ja rahi hai)
+                           
                             app.state.socket.emit('send-caption', data.text, app.state.roomId, null);
                         }
                     });
@@ -3162,18 +3101,13 @@
                         if (data.translation) {
                             window.activeSignBuffer = data.translation.split(" ");
                         }
-                        // 🔴 TRACKER 1: Check karo Python ne kya bheja
-                        // console.log("🧠 Python sent data:", data); 
-
-                        // Agar data.text me aa raha ho ya data.translation me, dono handle karega
+                        
                         const signText = data.translation || data.text;
 
                         if (signText && signText.trim() !== "") {
 
-                            // 🔴 LIVE CLASS: Student Teacher ko Text aur Audio dono bhej raha hai
                             if (app.state.inClass && app.state.socket && app.state.user?.role === 'student') {
 
-                                // 🟢 FIX: Sirf tab socket emit karo jab ye 'is_final' ho (Silence detect hone ke baad NLP se aaya hua polished sentence)
                                 if (data.is_final) {
                                     app.state.socket.emit('send-caption', signText, app.state.roomId, data.audio);
                                 }
@@ -3181,14 +3115,12 @@
                                 const secLabel = document.getElementById('secondary-video-label');
                                 const mainLabel = document.getElementById('main-video-label');
 
-                                // UI Par live words dikhane ke liye (Dheere dheere append honge)
                                 if (secLabel && secLabel.textContent.includes('Tracking')) {
                                     secLabel.innerHTML = `Sending ISL: <span class="text-green-400">${signText}</span>`;
                                 } else if (mainLabel && mainLabel.textContent.includes('Tracking')) {
                                     mainLabel.innerHTML = `Sending ISL: <span class="text-green-400">${signText}</span>`;
                                 }
                             }
-                            // 🔴 MITRA BRIDGE: Ye offline hai, toh yahan direct play aur dikhana hai
                             else if (!app.state.inClass && !document.getElementById('mitra-bridge-section').classList.contains('hidden')) {
                                 const bridgeText = document.getElementById('bridge-isl-translation');
                                 if (bridgeText) {
@@ -3211,7 +3143,6 @@
                                         const sound = new Audio(data.audio);
                                         sound.play().catch(err => console.log("Audio block:", err));
 
-                                        // Final sentence bolne ke 3 second baad screen saaf kar do agle sentence ke liye
                                         setTimeout(() => {
                                             bridgeText.innerHTML = '"Waiting for ISL Gestures..."';
                                         }, 3000);
@@ -3220,9 +3151,8 @@
                             }
                         }
 
-                        // 2. DETECTION LAYER (Cyberpunk lines overlay) - Ye bina ruke chalta rahega
                         if (data.processed_image) {
-                            // Ek helper function jo check karega kaunsa canvas samne hai
+                            
                             const drawToCanvas = (canvasId) => {
                                 const canvas = document.getElementById(canvasId);
                                 if (canvas && !canvas.classList.contains('hidden')) {
@@ -3239,10 +3169,10 @@
                             };
 
                             if (app.state.inClass && app.state.user?.role === 'student') {
-                                drawToCanvas('mediapipe-overlay'); // Live Class me draw karega
+                                drawToCanvas('mediapipe-overlay');  
                             }
 
-                            // 🔴 NAYA: Ask Doubt modal khula ho tab yahan draw karega
+                            
                             if (!document.getElementById('ask-doubt-modal').classList.contains('hidden')) {
                                 drawToCanvas('doubt-ai-overlay');
                             }
@@ -3272,14 +3202,14 @@
                 app.state.isProcessingFrame = false;
 
                 app.state.aiInterval = setInterval(() => {
-                    // 🔴 FIX: Hamesha dynamically check karo ki apna camera kis box me hai
+                   
                     let videoEl = document.getElementById(videoElementId);
 
                     if (app.state.inClass && app.state.localStream) {
                         const mainVid = document.getElementById('main-video-stream');
                         const secVid = document.getElementById('secondary-video-stream');
 
-                        // Jo box hamari LocalStream chala raha hai, AI wahi se frame lega!
+                        
                         if (mainVid.srcObject === app.state.localStream) {
                             videoEl = mainVid;
                         } else if (secVid.srcObject === app.state.localStream) {
@@ -3293,7 +3223,7 @@
                     // Failsafe 
                     setTimeout(() => { app.state.isProcessingFrame = false; }, 1000);
 
-                    // 🔴 FASTEST METHOD: Fixed lower resolution for instant speed
+                    
                     canvas.width = 640;
                     canvas.height = 480;
 
@@ -3307,7 +3237,7 @@
 
                     if (app.state.aiSocket && app.state.aiSocket.connected) {
 
-                        let currentContext = "class"; // Default formal mode
+                        let currentContext = "class"; 
                         if (videoElementId === 'bridge-camera-feed') currentContext = "bridge";
                         else if (videoElementId === 'search-camera-feed') currentContext = "search";
                         else if (videoElementId === 'student-doubt-camera') currentContext = "doubt";
@@ -3368,8 +3298,8 @@
                 </div>`;
                     aiPanel.classList.add('avatar-glow');
 
-                    // 🔴 3D ENGINE INITIALIZE KARNA
-                    // 500ms delay taaki HTML ache se load ho jaye
+                    // 
+                    //
                     // setTimeout(() => {
                     //     window.islAvatar = new AvatarEngine('avatar-render-box');
                     //     // Google ka official pre-animated Robot load kar rahe hain (Works directly via internet!)
@@ -3495,7 +3425,7 @@
                         let words = text.toLowerCase().split(/[ ,.?]+/);
                         let animToPlay = "idle";
 
-                        // Dictionary check karo
+                        
                         for (let w of words) {
                             if (videoDictionary[w]) {
                                 animToPlay = w;
@@ -3503,13 +3433,13 @@
                             }
                         }
 
-                        // Animation Chalao
+                        
                         console.log(`🤖 Triggering Video Feed: ${animToPlay}`);
                         window.islAvatar.playAnimation(animToPlay);
 
 
 
-                        // 🔴 2. STUDENT UI TEXT FEED 
+                         
                         const transcriptContainer = document.getElementById('live-caption-text');
                         if (transcriptContainer && text) {
                             if (transcriptContainer.innerHTML.includes("Connecting to")) {
@@ -3706,7 +3636,7 @@
                 app.state.inClass = false;
 
                 if (app.state.speechRecognition) {
-                    app.state.speechRecognition.onend = null; // Auto-restart loop todein
+                    app.state.speechRecognition.onend = null; //
                     app.state.speechRecognition.stop();
                     app.state.speechRecognition = null;
                 }
@@ -3738,7 +3668,6 @@
                 const bridgeStream = document.getElementById('bridge-camera-feed').srcObject;
                 if (bridgeStream) bridgeStream.getTracks().forEach(t => t.stop());
                 if (app.state.user && app.state.user.role === 'teacher') {
-                    // Sirf Teacher ka Transcript Box saaf hoga
                     const teacherBox = document.getElementById('teacher-transcript-box');
                     if (teacherBox) {
                         teacherBox.innerHTML = '<div id="teacher-ai-idle" class="flex flex-col items-center justify-center h-full text-center opacity-50 mt-10"><i class="fa-solid fa-hands-asl-interpreting text-5xl mb-3 text-gray-500"></i><p class="text-sm text-gray-400 font-medium">Awaiting student gestures...</p></div>';

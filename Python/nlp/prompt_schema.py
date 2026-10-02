@@ -43,7 +43,8 @@ def get_system_prompt(mode="academic"):
         Rules:
         1. STRICT OUTPUT: Respond ONLY with a raw, valid JSON object. No markdown.
         Schema: {"subject_category": "Math", "search_query": "Fractions by Arjun Sir"}
-        2. If the input is empty or nonsensical, respond with {"subject_category": "General", "search_query": "Basic ISL Greetings"}"""
+        2. If the input is empty or nonsensical, respond with {"subject_category": "General", "search_query": "Basic ISL Greetings"}
+        3. If the input is ambiguous, choose the most general subject and a broad search query."""
     }
     
     return prompts.get(mode, prompts["academic"])

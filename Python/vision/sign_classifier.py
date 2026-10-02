@@ -7,7 +7,6 @@ class SignLanguageClassifier:
         print("🧠 Loading Trained SignMitra AI Model...")
         
         try:
-            # 🔴 FIX: Dynamically path nikalna taaki file hamesha mil jaye
             current_dir = os.path.dirname(os.path.abspath(__file__)) # Ye vision folder hai
             parent_dir = os.path.dirname(current_dir) # Ye main Python folder hai
             
@@ -41,10 +40,8 @@ class SignLanguageClassifier:
             
             predicted_word = self.actions[best_match_index]
             
-            # 🔴 FIX: Terminal par AI ka dimaag print karo
             print(f"🤖 AI Guessed: '{predicted_word}' (Confidence: {confidence*100:.2f}%)")
             
-            # 45% se upar ho toh LLM ke liye aage bhejo
             if confidence > 0.45:
                 return predicted_word
             else:

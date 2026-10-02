@@ -88,11 +88,11 @@ export const patternLogin = async (req, res) => {
     try {
         const { patternCode } = req.body;
         
-        // Pattern se student ko dhoondho
+        
         const user = await User.findOne({ patternCode, role: 'student' });
         if (!user) return res.status(404).json({ error: 'Invalid Pattern. No student found.' });
 
-        // Agar mil gaya toh token de do
+        
         const token = jwt.sign({ id: user._id, role: user.role, name: user.name }, process.env.JWT_SECRET, { expiresIn: '7d' });
         
         res.json({ token, user: { id: user._id, name: user.name, username: user.username, role: user.role } });

@@ -2,16 +2,16 @@ import Class from '../models/Class.js';
 
 export const createClass = async (req, res) => {
     try {
-        // Sirf Teacher hi class bana sakta hai
+       
         if (req.user.role !== 'teacher') return res.status(403).json({ error: 'Only teachers can create classes.' });
         
         const { subject } = req.body;
         
-        // Random 4-digit code generate karein
+        
         const randomId = Math.random().toString(36).substring(2, 6).toUpperCase();
         const joinCode = `NEXUS-${randomId}`;
 
-        // Database me save karein
+        
         const newClass = new Class({ 
             teacherId: req.user.id, 
             subject, 
@@ -20,7 +20,7 @@ export const createClass = async (req, res) => {
         
         await newClass.save();
         
-        // Success response
+        
         res.status(201).json(newClass);
     } catch (err) {
         res.status(500).json({ error: err.message });

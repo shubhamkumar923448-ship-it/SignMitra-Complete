@@ -47,6 +47,6 @@ if __name__ == "__main__":
     print("🚀 Starting SignMitra Neural Engine...")
     print("👉 Ensure you run this from the ai_server directory.")
     # Run the wrapped socket_app instead of the plain app
-    #uvicorn.run(socket_app, host="127.0.0.1", port=5000)
-    port = int(os.environ.get("PORT", 5000))
-    uvicorn.run(socket_app, host="0.0.0.0", port=port)
+    uvicorn.run(socket_app, host="127.0.0.1", port=5000)
+    # port = int(os.environ.get("PORT", 5000))
+    # uvicorn.run(socket_app, host="0.0.0.0", port=port)

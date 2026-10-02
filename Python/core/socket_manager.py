@@ -108,31 +108,31 @@ async def background_ai_prediction(sid, sequence):
 async def handle_process_frame(sid, data):
     current_time = time.time()
     
-    # 🚀 FPS Limiter (Fast Camera)
+    
     if (current_time - client_last_frame_time.get(sid, 0)) < 0.1:
         return
     client_last_frame_time[sid] = current_time
 
-    # 🔴 FRONTEND SE AAYA HUA CONTEXT (class, bridge, search, doubt)
+    
     client_context = data.get('context', 'class')
 
     try:
         sentences = client_sentences.get(sid, [])
 
-        # 🔴 SILENCE DETECTOR
+        
         if len(sentences) > 0 and (current_time - client_last_time.get(sid, 0)) > 4.0:
             words_to_process = sentences.copy()
             client_sentences[sid] = [] 
             client_last_time[sid] = current_time 
 
-            # 🟢 SIRF TABHI NLP / VOICE BANAO JAB CLASS YA BRIDGE ME HO
+            
             if client_context in ['class', 'bridge']:
                 await sio.emit('translation_result', {'translation': "🤔 Processing...", 'is_final': False}, room=sid)
                 print(f"🤫 Silence Detected in '{client_context}' mode! Sending to NLP: {words_to_process}")
 
                 async def enhance_and_speak(raw_words, context_mode):
                     try:
-                        # Mitra Bridge ke liye 'casual', baki ke liye 'academic'
+                        
                         mode_to_use = "casual" if context_mode == "bridge" else "academic"
                         
                         final_text = await process_sign_sequence(raw_words, mode=mode_to_use)
@@ -151,7 +151,7 @@ async def handle_process_frame(sid, data):
                 
                 asyncio.create_task(enhance_and_speak(words_to_process, client_context))
             else:
-                # Agar Search ya Doubt khula hai, toh chup chaap buffer clear kar do, AI text mat banao
+                
                 print(f"🤫 Silence in '{client_context}' mode. Skipping NLP Audio generation.")
 
         if client_cooldown.get(sid, 0) > 0:
